@@ -28,7 +28,7 @@ namespace PontosDeInteresse
             await db.PoisModel.AddAsync(input);
             await db.SaveChangesAsync();
 
-            return TypedResults.Created("/pois");
+            return TypedResults.Created($"/pois/ver/{input.Id}", input);
         }
     }
 }
