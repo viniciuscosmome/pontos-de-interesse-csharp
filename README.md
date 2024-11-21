@@ -40,8 +40,10 @@ retornar os seguintes POIs:
 - [x] Cadastrar pontos de interesse, com 03 atributos: nome do POI, coordenada X (inteiro não negativo) e coordenada Y (inteiro não negativo).
 - [ ] Os POIs devem ser armazenados em uma base de dados.
 - [x] Listar todos os POIs cadastrados.
-- [ ] Buscar POI pelo seu ID.
+- [x] Buscar POI pelo seu ID.
 - [ ] Listar os POIs por proximidade. Este serviço receberá uma coordenada X e uma coordenada Y, especificando um ponto de referência, bem como uma distância máxima (d-max) em metros. O serviço deverá retornar todos os POIs da base de dados que estejam a uma distância menor ou igual a d-max a partir do ponto de referência.
+- [ ] Permitir a atualização de um POI
+- [ ] Permitir a exclusão de um POI
 
 </details>
 
@@ -63,10 +65,9 @@ retornar os seguintes POIs:
 
 ## Entradas da API
 
-| Rota						| Função													|
-|---------------------------|-----------------------------------------------------------|
-| `get` /pois				| Buscar todos os pontos de interesse						|
-| `get` /pois/ver/:id		| Buscar ponto de interesse pelo ID informado				|
-| `get` /pois/buscar		| Buscar ponto de interesse próximos a posição informada	|
-| `post` /pois				| Adiciona um novo ponto de interesse						|
-| `delete` /pois			| Remove um ponto de interesse								|
+| Rota							| Função													|
+|-------------------------------|-----------------------------------------------------------|
+| `get` /pois					| Buscar todos os pontos de interesse						|
+| `get` /pois/ver/:id			| Buscar ponto de interesse pelo ID informado				|
+| `get` /pois/buscar?d=&x=&y=	| Buscar ponto de interesse próximos a posição informada	|
+| `post` /pois					| Adiciona um novo ponto de interesse						|
