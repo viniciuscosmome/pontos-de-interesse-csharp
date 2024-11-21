@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using PontosDeInteresse;
 
@@ -9,6 +10,8 @@ builder.Services.AddDbContext<PoisDb>(opt =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
 
-app.MapGet("/pois", () => "hello world!");
+PoisRepository Repository = new();
+
+app.MapGet("/pois", Repository.getAll);
 
 app.Run();
