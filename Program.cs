@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using PontosDeInteresse;
 
@@ -12,6 +11,7 @@ var app = builder.Build();
 
 PoisRepository Repository = new();
 
-app.MapGet("/pois", Repository.getAll);
+app.MapGet("/pois", Repository.GetAll);
+app.MapPost("/pois", Repository.RegisterPois);
 
 app.Run();

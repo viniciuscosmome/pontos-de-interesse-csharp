@@ -3,3 +3,14 @@
 GET {{ApiUrl}}/pois
 
 ###
+
+POST {{ApiUrl}}/pois
+Content-Type: application/json
+
+{
+  "Name": "Nome dois",
+  "CoordX": 1,
+  "CoordY": 2
+}
+
+###
