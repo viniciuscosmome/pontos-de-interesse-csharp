@@ -4,6 +4,10 @@ GET {{ApiUrl}}/pois
 
 ###
 
+GET {{ApiUrl}}/pois/ver/1
+
+###
+
 POST {{ApiUrl}}/pois
 Content-Type: application/json
 

@@ -9,9 +9,10 @@ builder.Services.AddDbContext<PoisDb>(opt =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
 
-PoisRepository Repository = new();
+PoisService Service = new();
 
-app.MapGet("/pois", Repository.GetAll);
-app.MapPost("/pois", Repository.RegisterPois);
+app.MapGet("/pois", Service.GetAll);
+app.MapGet("/pois/ver/{id}", Service.FindBydId);
+app.MapPost("/pois", Service.RegisterPois);
 
 app.Run();
