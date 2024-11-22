@@ -2,9 +2,8 @@
 
 namespace PontosDeInteresse
 {
-    public class PoisDb : DbContext
+    public class PoisDb(DbContextOptions<PoisDb> options) : DbContext(options)
     {
-        public PoisDb(DbContextOptions<PoisDb> options) : base(options) {}
         public DbSet<PoisModel> PoisModel => Set<PoisModel>();
     }
 }
