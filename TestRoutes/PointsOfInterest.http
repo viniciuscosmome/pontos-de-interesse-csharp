@@ -8,9 +8,9 @@ GET {{ApiUrl}}/pois/ver/1
 
 ###
 
-@Distancia = 1
-@CoordX = 5
-@CoordY = 5
+@Distancia = 10
+@CoordX = 20
+@CoordY = 10
 
 GET {{ApiUrl}}/pois/buscar?d={{distancia}}&x={{CoordX}}&y={{CoordY}}
 
@@ -20,9 +20,9 @@ POST {{ApiUrl}}/pois
 Content-Type: application/json
 
 {
-  "Name": "Nome dois",
-  "CoordX": 12,
-  "CoordY": 5
+  "Name": "Ponto teste",
+  "CoordX": 5,
+  "CoordY": 2
 }
 
 ###
