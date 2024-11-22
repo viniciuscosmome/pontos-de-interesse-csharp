@@ -41,7 +41,7 @@ retornar os seguintes POIs:
 - [ ] Os POIs devem ser armazenados em uma base de dados.
 - [x] Listar todos os POIs cadastrados.
 - [x] Buscar POI pelo seu ID.
-- [ ] Listar os POIs por proximidade. Este serviço receberá uma coordenada X e uma coordenada Y, especificando um ponto de referência, bem como uma distância máxima (d-max) em metros. O serviço deverá retornar todos os POIs da base de dados que estejam a uma distância menor ou igual a d-max a partir do ponto de referência.
+- [x] Listar os POIs por proximidade. Este serviço receberá uma coordenada X e uma coordenada Y, especificando um ponto de referência, bem como uma distância máxima (d-max) em metros. O serviço deverá retornar todos os POIs da base de dados que estejam a uma distância menor ou igual a d-max a partir do ponto de referência.
 - [ ] Permitir a atualização de um POI
 - [ ] Permitir a exclusão de um POI
 
