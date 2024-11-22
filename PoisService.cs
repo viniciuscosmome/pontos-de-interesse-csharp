@@ -41,15 +41,12 @@ namespace PontosDeInteresse
 
             foreach(PoisModel Poi in ApproximatePoisFound)
             {
-                double CO = (double) Math.Abs(x - Poi.CoordX);
-                double CA = (double) Math.Abs(y - Poi.CoordY);
+                double PowerCO = Math.Pow(x - Poi.CoordX, 2.0d);
+                double PowerCA = Math.Pow(y - Poi.CoordY, 2.0d);
 
-                double PowerCO = Math.Pow(CO, 2.0d);
-                double PowerCA = Math.Pow(CA, 2.0d);
+                double PoisDistance = Math.Sqrt(PowerCO + PowerCA);
 
-                double Hypotenuse = Math.Round(Math.Sqrt(PowerCO + PowerCA));
-
-                bool IsValidRange = Hypotenuse <= d;
+                bool IsValidRange = PoisDistance <= d;
 
                 if (IsValidRange)
                 {
@@ -59,7 +56,7 @@ namespace PontosDeInteresse
 
             if (PoisResponse.Count < 1)
             {
-                return TypedResults.NotFound($"Não encontramos nenhum POI à {d} metros da localização informada.");
+                return TypedResults.NotFound($"Não encontramos nenhum POI a {d} metros da localização informada.");
             }
 
             return TypedResults.Ok(PoisResponse);
