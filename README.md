@@ -33,7 +33,13 @@ deve retornar os seguintes POIs:
 | Pub			|
 | Supermercado	|
 
-## Entradas da API
+> [!tip]\
+> Você pode encontrar mais desafios como esse em:\
+> ***[@backend-br](https://github.com/backend-br/desafios)***
+
+## API
+
+### Entradas da API
 
 | Rota							| Função													|
 |-------------------------------|-----------------------------------------------------------|
@@ -42,7 +48,7 @@ deve retornar os seguintes POIs:
 | `get` /pois/buscar?d=&x=&y=	| Buscar ponto de interesse próximos a posição informada	|
 | `post` /pois					| Adiciona um novo ponto de interesse						|
 
-## lista de objetivos
+### lista de objetivos
 
 <details>
 <summary><strong>Ver lista de objetivos</strong></summary>
@@ -64,7 +70,3 @@ deve retornar os seguintes POIs:
 </details>
 
 ---
-
-> [!tip]\
-> Você pode encontrar mais desafios como esse em:\
-> ***[@backend-br](https://github.com/backend-br/desafios)***
