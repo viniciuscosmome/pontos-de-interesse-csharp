@@ -87,5 +87,20 @@ namespace PontosDeInteresse
 
             return TypedResults.Ok("Ponto de interesse atualizado");
         }
+
+        public async Task<IResult> DeletePois(int id, PoisDb db)
+        {
+            var Poi = await db.PoisModel.FindAsync(id);
+
+            if (Poi is null)
+            {
+                return TypedResults.NotFound("O ponto de interesse informado não existe na base de dados");
+            }
+
+            db.PoisModel.Remove(Poi);
+            await db.SaveChangesAsync();
+
+            return TypedResults.Ok("Ponto de interesse removido da base de dados.");
+        }
     }
 }

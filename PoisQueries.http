@@ -37,3 +37,7 @@ Content-Type: application/json
 }
 
 ###
+
+DELETE {{api}}/pois/1
+
+###
