@@ -9,6 +9,15 @@ builder.Services.AddDbContext<PoisDb>(opt =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
 
+if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+{
+    using var scope = app.Services.CreateScope();
+
+    var context = scope.ServiceProvider.GetRequiredService<PoisDb>();
+    var seeder = new PoisSeed(context);
+    seeder.SeedData();
+}
+
 PoisService Service = new();
 
 app.MapGet("/pois", Service.GetAll);
