@@ -69,5 +69,23 @@ namespace PontosDeInteresse
 
             return TypedResults.Created($"/pois/ver/{input.Id}", input);
         }
+
+        public async Task<IResult> UpdatePois(int id, PoisModel input, PoisDb db)
+        {
+            var PoiFound = await db.PoisModel.FindAsync(id);
+
+            if (PoiFound is null)
+            {
+                return TypedResults.NotFound("Ponto de interesse não encontrado. (x={input.CoordX}, y={input.CoordY})");
+            }
+
+            PoiFound.Name = input.Name;
+            PoiFound.CoordX = input.CoordX;
+            PoiFound.CoordY = input.CoordY;
+
+            await db.SaveChangesAsync();
+
+            return TypedResults.Ok("Ponto de interesse atualizado");
+        }
     }
 }

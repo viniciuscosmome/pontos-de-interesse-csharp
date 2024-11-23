@@ -23,6 +23,7 @@ PoisService Service = new();
 app.MapGet("/pois", Service.GetAll);
 app.MapGet("/pois/ver/{id}", Service.FindBydId);
 app.MapGet("/pois/buscar", Service.FindByDistance);
+app.MapPut("/pois/{id}", Service.UpdatePois);
 app.MapPost("/pois", Service.RegisterPois);
 
 app.Run();
