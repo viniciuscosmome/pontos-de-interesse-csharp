@@ -1,0 +1,28 @@
+@api = http://localhost:5500
+
+GET {{api}}/pois
+
+###
+
+GET {{api}}/pois/ver/1
+
+###
+
+@distancia = 10
+@coordenada_x = 20
+@coordenada_y = 10
+
+GET {{api}}/pois/buscar?d={{distancia}}&x={{coordenada_x}}&y={{coordenada_y}}
+
+###
+
+POST {{api}}/pois
+Content-Type: application/json
+
+{
+  "Name": "Ponto teste",
+  "CoordX": 5,
+  "CoordY": 2
+}
+
+###
