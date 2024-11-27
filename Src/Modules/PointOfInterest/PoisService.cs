@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using PontosDeInteresse.Src.infra;
 
-namespace PontosDeInteresse
+namespace PontosDeInteresse.Src.Modules.PointOfInterest
 {
     public class PoisService
     {
@@ -39,14 +39,14 @@ namespace PontosDeInteresse
 
             List<PoisModel> PoisResponse = [];
 
-            var ApproximatePoisFound = await db.PoisModel.Where((poi) => (            
+            var ApproximatePoisFound = await db.PoisModel.Where((poi) => 
                 poi.CoordX <= RightLimit &&
                 poi.CoordX >= LeftLimit &&
                 poi.CoordY <= TopLimit &&
                 poi.CoordY >= BottomLimit
-            )).ToListAsync();
+            ).ToListAsync();
 
-            foreach(PoisModel Poi in ApproximatePoisFound)
+            foreach (PoisModel Poi in ApproximatePoisFound)
             {
                 double PowerCO = Math.Pow(x - Poi.CoordX, 2.0d);
                 double PowerCA = Math.Pow(y - Poi.CoordY, 2.0d);
