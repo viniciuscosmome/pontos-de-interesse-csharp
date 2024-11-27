@@ -83,6 +83,7 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
             return await next.Invoke(context);
         }
     }
+
     public class OnlyIdPoisFilter : IEndpointFilter
     {
         public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
@@ -95,6 +96,46 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
             if (!checkId.IsValid)
             {
                 validations.Add(checkId.GetError());
+            }
+
+            if (validations.Count > 0)
+            {
+                string responseBody = JsonSerializer.Serialize(new { errors = validations });
+                context.HttpContext.Response.StatusCode = 400;
+                await context.HttpContext.Response.WriteAsync(responseBody);
+            }
+
+            return await next.Invoke(context);
+        }
+    }
+
+    public class OnlyCoordinatePoisFilter : IEndpointFilter
+    {
+        public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
+        {
+            List<object> validations = [];
+
+            var inputDistance = context.GetArgument<int>(0);
+            var inputCoordX = context.GetArgument<int>(1);
+            var inputCoordY = context.GetArgument<int>(2);
+
+            IntegerValidation checkDistance = new(inputDistance, true, "Distance");
+            IntegerValidation checkCoordX = new(inputCoordX, true, "CoordX");
+            IntegerValidation checkCoordY = new(inputCoordY, true, "CoordY");
+
+            if (!checkDistance.IsValid)
+            {
+                validations.Add(checkDistance.GetError());
+            }
+
+            if (!checkCoordX.IsValid)
+            {
+                validations.Add(checkCoordX.GetError());
+            }
+
+            if (!checkCoordY.IsValid)
+            {
+                validations.Add(checkCoordY.GetError());
             }
 
             if (validations.Count > 0)

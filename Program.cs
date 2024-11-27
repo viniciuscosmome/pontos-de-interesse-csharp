@@ -22,7 +22,7 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development
 PoisService Service = new();
 
 app.MapGet("/pois", Service.GetAll);
-app.MapGet("/pois/buscar", Service.FindByDistance);
+app.MapGet("/pois/buscar", Service.FindByDistance).AddEndpointFilter<OnlyCoordinatePoisFilter>();
 app.MapGet("/pois/ver/{id}", Service.FindBydId).AddEndpointFilter<OnlyIdPoisFilter>();
 app.MapPut("/pois/{id}", Service.UpdatePois).AddEndpointFilter<UpdatePoisFilter>();
 app.MapDelete("/pois/{id}", Service.DeletePois).AddEndpointFilter<OnlyIdPoisFilter>();
