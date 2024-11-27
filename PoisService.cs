@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace PontosDeInteresse
 {
@@ -8,19 +9,25 @@ namespace PontosDeInteresse
         {
             var AllPois = await db.PoisModel.ToListAsync();
 
-            return TypedResults.Ok(AllPois);
+            object responseBody = new { count = AllPois.Count, data = AllPois };
+
+            return TypedResults.Ok(responseBody);
         }
 
         public async Task<IResult> FindBydId(int id, PoisDb db)
         {
+            object responseBody;
             var PoiFound = await db.PoisModel.FindAsync(id);
 
-            if (PoiFound is not null && PoiFound is PoisModel)
+            if (PoiFound is null)
             {
-                return TypedResults.Ok(PoiFound);
+                responseBody = new { message = $"O ponto de interesse não foi encontrado." };
+                return TypedResults.NotFound(responseBody);
             }
 
-            return TypedResults.NotFound($"O ponto de interesse com id {id} não foi encontrado.");
+            responseBody = new { data = PoiFound };
+
+            return TypedResults.Ok(responseBody);
         }
 
         public async Task<IResult> FindByDistance(int d, int x, int y, PoisDb db)
@@ -54,12 +61,18 @@ namespace PontosDeInteresse
                 }
             }
 
+            object responseBody;
+
             if (PoisResponse.Count < 1)
             {
-                return TypedResults.NotFound($"Não encontramos nenhum POI a {d} metros da localização informada.");
+                responseBody = new { message = $"Não encontramos nenhum POI a {d} metros da localização informada." };
+
+                return TypedResults.NotFound(responseBody);
             }
 
-            return TypedResults.Ok(PoisResponse);
+            responseBody = new { count = PoisResponse.Count, data = PoisResponse };
+
+            return TypedResults.Ok(responseBody);
         }
 
         public async Task<IResult> RegisterPois(PoisModel input, PoisDb db)
@@ -67,7 +80,9 @@ namespace PontosDeInteresse
             db.PoisModel.Add(input);
             await db.SaveChangesAsync();
 
-            return TypedResults.Created($"/pois/ver/{input.Id}", input);
+            object responseBody = new { data = input };
+
+            return TypedResults.Created($"/pois/ver/{input.Id}", responseBody);
         }
 
         public async Task<IResult> UpdatePois(int id, PoisModel input, PoisDb db)
@@ -85,7 +100,9 @@ namespace PontosDeInteresse
 
             await db.SaveChangesAsync();
 
-            return TypedResults.Ok("Ponto de interesse atualizado");
+            object responseBody = new { message = "Ponto de interesse atualizado" };
+
+            return TypedResults.Ok(responseBody);
         }
 
         public async Task<IResult> DeletePois(int id, PoisDb db)
@@ -100,7 +117,9 @@ namespace PontosDeInteresse
             db.PoisModel.Remove(Poi);
             await db.SaveChangesAsync();
 
-            return TypedResults.Ok("Ponto de interesse removido da base de dados.");
+            object responseBody = new { message = "Ponto de interesse removido da base de dados." };
+
+            return TypedResults.Ok(responseBody);
         }
     }
 }
