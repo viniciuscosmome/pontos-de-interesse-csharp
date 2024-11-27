@@ -95,20 +95,9 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
                 return TypedResults.NotFound(responseBody);
             }
 
-            if (input.Name is not null)
-            {
-                PoiFound.Name = input.Name;
-            }
-
-            if (input.CoordX >= 0)
-            {
-                PoiFound.CoordX = input.CoordX;
-            }
-            
-            if (input.CoordY >= 0)
-            {
-                PoiFound.CoordY = input.CoordY;
-            }
+            if (input.Name is not null) PoiFound.Name = input.Name;
+            if (input.CoordX >= 0) PoiFound.CoordX = input.CoordX;
+            if (input.CoordY >= 0) PoiFound.CoordY = input.CoordY;
 
             await db.SaveChangesAsync();
 
