@@ -11,11 +11,23 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest.EndpointFilters
             List<object> validations = [];
             var inputValidation = context.GetArgument<PoisModel>(0);
             NameValidation checkPoiName = new(inputValidation.Name, true, "Name");
+            IntegerValidation checkCoordX = new(inputValidation.CoordX, true, "CoordX");
+            IntegerValidation checkCoordY = new(inputValidation.CoordY, true, "CoordY");
 
             if (!checkPoiName.IsValid)
             {
                 validations.Add(checkPoiName.GetError());
-            };
+            }
+
+            if (!checkCoordX.IsValid)
+            {
+                validations.Add(checkCoordX.GetError());
+            }
+
+            if (!checkCoordY.IsValid)
+            {
+                validations.Add(checkCoordY.GetError());
+            }
 
             if (validations.Count > 0)
             {
