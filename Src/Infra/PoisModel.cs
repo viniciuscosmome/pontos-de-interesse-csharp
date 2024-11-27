@@ -1,4 +1,4 @@
-﻿namespace PontosDeInteresse
+﻿namespace PontosDeInteresse.Src.infra
 {
     public class PoisModel
     {

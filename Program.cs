@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using PontosDeInteresse;
+using PontosDeInteresse.Src.infra;
+using PontosDeInteresse.Src.Modules.PointOfInterest;
+using PontosDeInteresse.Src.Modules.PointOfInterest.EndpointFilters;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PoisDb>(opt =>
@@ -25,6 +27,6 @@ app.MapGet("/pois/buscar", Service.FindByDistance);
 app.MapGet("/pois/ver/{id}", Service.FindBydId);
 app.MapPut("/pois/{id}", Service.UpdatePois);
 app.MapDelete("/pois/{id}", Service.DeletePois);
-app.MapPost("/pois", Service.RegisterPois);
+app.MapPost("/pois", Service.RegisterPois).AddEndpointFilter<RegisterPoisFilter>();
 
 app.Run();

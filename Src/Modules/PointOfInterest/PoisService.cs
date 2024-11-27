@@ -65,8 +65,7 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
 
             if (PoisResponse.Count < 1)
             {
-                responseBody = new { message = $"Não encontramos nenhum POI a {d} metros da localização informada." };
-
+                responseBody = new { message = "Não encontramos Pontos de interesse próximos a localização informada." };
                 return TypedResults.NotFound(responseBody);
             }
 
@@ -88,10 +87,12 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
         public async Task<IResult> UpdatePois(int id, PoisModel input, PoisDb db)
         {
             var PoiFound = await db.PoisModel.FindAsync(id);
+            object responseBody;
 
             if (PoiFound is null)
             {
-                return TypedResults.NotFound("Ponto de interesse não encontrado. (x={input.CoordX}, y={input.CoordY})");
+                responseBody = new { message = "Ponto de interesse não encontrado." };
+                return TypedResults.NotFound(responseBody);
             }
 
             PoiFound.Name = input.Name;
@@ -100,7 +101,7 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
 
             await db.SaveChangesAsync();
 
-            object responseBody = new { message = "Ponto de interesse atualizado" };
+            responseBody = new { message = "Ponto de interesse atualizado" };
 
             return TypedResults.Ok(responseBody);
         }

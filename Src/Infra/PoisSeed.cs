@@ -1,6 +1,4 @@
-﻿using PontosDeInteresse.Src.infra;
-
-namespace PontosDeInteresse
+﻿namespace PontosDeInteresse.Src.infra
 {
     public class PoisSeed(PoisDb db)
     {
@@ -24,11 +22,13 @@ namespace PontosDeInteresse
                 await db.SaveChangesAsync();
 
                 Console.WriteLine("A basse de dados foi populada");
-            } catch (Exception Error)
+            }
+            catch (Exception Error)
             {
                 Console.WriteLine("Erro ao tentar popular a base de dados");
                 Console.WriteLine(Error);
-            } finally
+            }
+            finally
             {
                 Console.WriteLine("---------- END SEED ---------");
             }
