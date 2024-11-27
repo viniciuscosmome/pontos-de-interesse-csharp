@@ -1,4 +1,6 @@
-﻿namespace PontosDeInteresse
+﻿using PontosDeInteresse.Src.infra;
+
+namespace PontosDeInteresse
 {
     public class PoisSeed(PoisDb db)
     {
