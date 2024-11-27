@@ -95,13 +95,24 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
                 return TypedResults.NotFound(responseBody);
             }
 
-            PoiFound.Name = input.Name;
-            PoiFound.CoordX = input.CoordX;
-            PoiFound.CoordY = input.CoordY;
+            if (input.Name is not null)
+            {
+                PoiFound.Name = input.Name;
+            }
+
+            if (input.CoordX >= 0)
+            {
+                PoiFound.CoordX = input.CoordX;
+            }
+            
+            if (input.CoordY >= 0)
+            {
+                PoiFound.CoordY = input.CoordY;
+            }
 
             await db.SaveChangesAsync();
 
-            responseBody = new { message = "Ponto de interesse atualizado" };
+            responseBody = new { message = "Ponto de interesse atualizado", data = PoiFound };
 
             return TypedResults.Ok(responseBody);
         }
@@ -109,16 +120,18 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
         public async Task<IResult> DeletePois(int id, PoisDb db)
         {
             var Poi = await db.PoisModel.FindAsync(id);
+            object responseBody;
 
             if (Poi is null)
             {
-                return TypedResults.NotFound("O ponto de interesse informado não existe na base de dados");
+                responseBody = new { message = "O ponto de interesse informado não existe na base de dados" };
+                return TypedResults.NotFound(responseBody);
             }
 
             db.PoisModel.Remove(Poi);
             await db.SaveChangesAsync();
 
-            object responseBody = new { message = "Ponto de interesse removido da base de dados." };
+            responseBody = new { message = "Ponto de interesse removido da base de dados." };
 
             return TypedResults.Ok(responseBody);
         }
