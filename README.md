@@ -60,11 +60,11 @@ deve retornar os seguintes POIs:
 - [x] Listar os POIs por proximidade. Este serviço receberá uma coordenada X e uma coordenada Y, especificando um ponto de referência, bem como uma distância máxima (d-max) em metros. O serviço deverá retornar todos os POIs da base de dados que estejam a uma distância menor ou igual a d-max a partir do ponto de referência.
 - [x] Permitir a atualização de um POI
 - [x] Permitir a exclusão de um POI
-- [ ] Adicionar validação em todos os dados enviados pelo cliente
-	- [ ] ID: Inteiro positivo.
-	- [ ] Nome do ponto de interesse: Texto alfanumérico.
-	- [ ] Coordenada X: Inteiro positivo.
-	- [ ] Coordenada Y: Inteiro positivo.
+- [x] Adicionar validação em todos os dados enviados pelo cliente
+	- [x] ID: Inteiro positivo.
+	- [x] Nome do ponto de interesse: Texto alfanumérico.
+	- [x] Coordenada X: Inteiro positivo.
+	- [X] Coordenada Y: Inteiro positivo.
 - [x] Criar uma seed para popular a base de dados para testes.
 
 </details>
