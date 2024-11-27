@@ -23,9 +23,9 @@ PoisService Service = new();
 
 app.MapGet("/pois", Service.GetAll);
 app.MapGet("/pois/buscar", Service.FindByDistance);
-app.MapGet("/pois/ver/{id}", Service.FindBydId);
+app.MapGet("/pois/ver/{id}", Service.FindBydId).AddEndpointFilter<OnlyIdPoisFilter>();
 app.MapPut("/pois/{id}", Service.UpdatePois).AddEndpointFilter<UpdatePoisFilter>();
-app.MapDelete("/pois/{id}", Service.DeletePois);
+app.MapDelete("/pois/{id}", Service.DeletePois).AddEndpointFilter<OnlyIdPoisFilter>();
 app.MapPost("/pois", Service.RegisterPois).AddEndpointFilter<RegisterPoisFilter>();
 
 app.Run();

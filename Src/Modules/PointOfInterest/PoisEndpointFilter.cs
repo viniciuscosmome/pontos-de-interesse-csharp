@@ -83,4 +83,28 @@ namespace PontosDeInteresse.Src.Modules.PointOfInterest
             return await next.Invoke(context);
         }
     }
+    public class OnlyIdPoisFilter : IEndpointFilter
+    {
+        public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
+        {
+            List<object> validations = [];
+            var inputId = context.GetArgument<int>(0);
+
+            IntegerValidation checkId = new(inputId, true, "Id");
+
+            if (!checkId.IsValid)
+            {
+                validations.Add(checkId.GetError());
+            }
+
+            if (validations.Count > 0)
+            {
+                string responseBody = JsonSerializer.Serialize(new { errors = validations });
+                context.HttpContext.Response.StatusCode = 400;
+                await context.HttpContext.Response.WriteAsync(responseBody);
+            }
+
+            return await next.Invoke(context);
+        }
+    }
 }
